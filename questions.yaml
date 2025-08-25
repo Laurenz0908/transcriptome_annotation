@@ -1,0 +1,32 @@
+task: >
+  You have been given trimmed paired RNA-seq reads and a fasta file with a transcriptome in the data/ folder and should map the reads to the reference genome to see which transcripts are expressed. For all transcripts that are longer than 500 basepairs and that have at least one read mapped to them (expression larger than 0) you should identify open reading frames using TransDecoder. For the first 100 transcripts use HMMER and the provided PFAM database file to annotate the transcripts. Using the provided mapping file from PFAM IDs to GO Terms (data/pfam2go.txt) you should add a column containing GO Terms IDs to the HMMER output file.
+
+questions:
+  - id: q1
+    stage: alignment
+    text: |
+      What percentage of reads can be mapped to the reference transcriptome?
+    answer_type: numeric_percent
+    tolerance: 0.5          # ±0.5 percentage points accepted
+  - id: q2
+    stage: alignment
+    text: |
+      Keep only the transcripts that are longer than 500 basepairs and have at least one read mapping to them. What is their average length?
+    answer_type: integer_exact
+    tolerance: 5
+  - id: q3
+    stage: annotation
+    text: |
+      How many complete protein coding sequences did TransDecoder find in the filtered transcripts?
+    answer_type: integer_exact
+  - id: q4
+    stage: annotation
+    text: |
+      What protein does hmmscan predict for the protein sequence ID "TRINITY_DN0_c0_g2_i1.p1"?
+    answer_type: string_exact
+  - id: q5
+    stage: annotation
+    text: |
+      Which GO Term IDs are associated to the transcript 'TRINITY_DN0_c10_g1_i1.p1'?
+    answer_type: set_unordered
+    

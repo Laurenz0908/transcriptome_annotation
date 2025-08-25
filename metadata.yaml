@@ -1,0 +1,7 @@
+paper_title: Molecular circadian rhythms are robust in marine annelids lacking rhythmic behavior
+doi: doi.org/10.1371/journal.pbio.3002572
+data_source: "https://datadryad.org/dataset/doi:10.5061/dryad.31zcrjdnq"
+domain: rna_seq
+tools: [TransDecoder 5.7.1, seqtk 1.3, HMMER 3.4, salmon 1.10.3, awk]
+estimated_runtime_minutes: 20
+estimated_time_for_human: 6h
