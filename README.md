@@ -8,11 +8,18 @@ This task is based on publicly available sequencing data from a study of **Chron
 
 ---
 
-## 2. How to download
+## 2. How to download and subsample
 
 The FASTQ files and the fasta reference genome are available under:
 ```
 https://datadryad.org/dataset/doi:10.5061/dryad.31zcrjdnq
+```
+
+To reduce file size the read files were subsampled to 10% of the original files using the commands:
+
+```bash
+seqtk sample -s100 A_ZT00_1_sub_1.trim.fastq.gz 0.1 > A_ZT00_1_sub_1.trim.fastq
+seqtk sample -s100 A_ZT00_1_sub_2.trim.fastq.gz 0.1 > A_ZT00_1_sub_2.trim.fastq
 ```
 
 ---

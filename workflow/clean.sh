@@ -1,9 +1,14 @@
 #!/bin/bash
 
+########### EXTRACT ARCHIVES ############
+
+gunzip data/reference-transcriptome_sequences.fa.gz
+gunzip data/Pfam-A.hmm.gz
+
 ########### MAP READS TO REFERENCE GENOME ##############
 
 salmon index -t data/reference-transcriptome_sequences.fa -i transcripts_index -k 31
-salmon quant -i transcripts_index/ -l ISR -1 data/A_ZT00_1_1.trim.fastq.gz -2 data/A_ZT00_1_2.trim.fastq.gz --validateMappings -o transcripts_quant
+salmon quant -i transcripts_index/ -l ISR -1 data/A_ZT00_1_sub_1.trim.fastq.gz -2 data/A_ZT00_1_sub_2.trim.fastq.gz --validateMappings -o transcripts_quant
 
 A1=$(grep 'Mapping rate' transcripts_quant/logs/salmon_quant.log | cut -d'=' -f2 | xargs)
 
@@ -33,12 +38,11 @@ echo "TransDecoder finds ${A3} complete coding sequences."
 
 seqtk seq -l 0 filtered_transcripts.fa.transdecoder.pep | head -n 200 | seqtk seq -l 60 > transdecoder_subset.fa.pep
 
-gunzip data/Pfam-A.hmm.gz
 hmmpress data/Pfam-A.hmm
 
 hmmscan --cpu 12 --domtblout hmmscanPFAM.out data/Pfam-A.hmm transdecoder_subset.fa.pep
 
-A4=$(awk '$4=="TRINITY_DN0_c0_g2_i1.p1"{print $1}' hmmscanPFAM.out)
+A4=$(awk '$4=="TRINITY_DN0_c0_g2_i4.p1"{print $1}' hmmscanPFAM.out)
 
 echo "The predicted expressed protein on the transcript TRINITY_DN0_c0_g2_i1.p1 is ${A4}"
 
